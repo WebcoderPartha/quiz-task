@@ -25,6 +25,9 @@ const submit = () => {
         <Head title="Register" />
 
         <form @submit.prevent="submit">
+            <div class="mb-4 font-medium text-base text-center text-black border-b">
+                BARC QUIZ SYSTEM - REGISTER
+            </div>
             <div>
                 <InputLabel for="name" value="Name" />
 
@@ -86,17 +89,23 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link
+            <div class="flex flex-col gap-2 mt-4">
+                <!-- <Link
                     :href="route('login')"
                     class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                     Already registered?
-                </Link>
+                </Link> -->
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Register
                 </PrimaryButton>
+                  <Link
+                    :href="route('login')"
+                    class="underline text-sm text-center text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Already registered?
+                </Link>
             </div>
         </form>
     </GuestLayout>

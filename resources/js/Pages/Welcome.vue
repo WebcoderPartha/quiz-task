@@ -16,6 +16,10 @@ defineProps({
         type: String,
         required: true,
     },
+    partha: {
+        type: String,
+        required: true
+    }
 });
 </script>
 

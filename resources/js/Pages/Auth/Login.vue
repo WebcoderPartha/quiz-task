@@ -7,14 +7,6 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
-defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
 
 const form = useForm({
     email: '',
@@ -33,8 +25,8 @@ const submit = () => {
     <GuestLayout>
         <Head title="Log in" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
+        <div class="mb-4 font-medium text-base text-center text-black border-b">
+            BARC QUIZ SYSTEM LOGIN
         </div>
 
         <form @submit.prevent="submit">
@@ -68,15 +60,24 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
-
+<!-- 
             <div class="block mt-4">
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
                     <span class="ms-2 text-sm text-gray-600">Remember me</span>
                 </label>
+            </div> -->
+            <div class="flex flex-col gap-2 mt-4">
+                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Log in
+                </PrimaryButton>
+                <Link
+                    :href="route('register')"
+                    class="bg-[#4361ee] focus:outline focus:outline-2 text-white text-center py-1"
+                    >Register Now</Link
+                >
             </div>
-
-            <div class="flex items-center justify-end mt-4">
+            <!-- <div class="flex items-center justify-end mt-4">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
@@ -85,10 +86,8 @@ const submit = () => {
                     Forgot your password?
                 </Link>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </PrimaryButton>
-            </div>
+              
+            </div> -->
         </form>
     </GuestLayout>
 </template>
