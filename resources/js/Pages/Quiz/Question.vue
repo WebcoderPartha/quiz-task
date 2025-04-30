@@ -8,6 +8,8 @@ const props = defineProps({
   questions: Array
 })
 
+const submitted = ref(false);
+
 const timeLeft = ref(600) // 10 minutes in seconds
 
 onMounted(() => {
@@ -22,14 +24,19 @@ onMounted(() => {
 })
 
 const form = useForm({
-  answers: {}
+  answers: {},
+  time_taken: 0
 })
 
 const submitQuiz = () => {
-    console.log(form?.answers)
-//   form.post('/quiz-result', {
-//     onSuccess: () => console.log('Submitted')
-//   })
+  // check if form already submitted
+  if (submitted.value) return
+
+  submitted.value = true;
+  form.time_taken = 600 - timeLeft.value // total time - remaining time
+  form.post('/quiz/result', {
+    onSuccess: () => console.log('Submitted')
+  })
 }
 </script>
 
@@ -44,7 +51,7 @@ const submitQuiz = () => {
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <h1 class="text-2xl font-bold mb-4">Quiz</h1>
-                <div class="mb-4 text-red-600 font-semibold">Time Left: {{ Math.floor(timeLeft / 60) }}:{{ (timeLeft % 60).toString().padStart(2, '0') }}</div>
+                <div class="mb-4  text-red-600 text-2xl font-semibold">Time Left: {{ Math.floor(timeLeft / 60) }}:{{ (timeLeft % 60).toString().padStart(2, '0') }}</div>
                 <div class="grid grid-cols-2 gap-4">
                     <div v-for="(q, index) in props.questions" :key="q.id" class="mb-6 bg-white px-4 py-2 rounded-md shadow-md">
                         <p class="font-medium mb-2">{{ index + 1 }}. {{ q.question }}</p>
