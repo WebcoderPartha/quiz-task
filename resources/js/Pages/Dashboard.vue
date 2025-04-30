@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -13,9 +13,9 @@ import { Head } from '@inertiajs/vue3';
 
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="w-56 h-56 bg-white text-black text-xl font-semibold rounded-md flex items-center justify-center">
+                <Link :href="route('quiz.question')" class="w-56 h-56 bg-white text-black text-xl font-semibold rounded-md flex items-center justify-center">
                     EXAM-1
-                </div>
+                </Link>
             </div>
         </div>
     </AuthenticatedLayout>
